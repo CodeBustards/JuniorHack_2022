@@ -13,26 +13,9 @@ public class Add_record {
         String course=get_course();
         String grade=get_grade();
         int credits=get_credits();
-        try{
-            String url ="jdbc:mysql://localhost:3306/student";
-    		String user="root";
-    		String pw="";
-    		Connection connect=DriverManager.getConnection(url,user,pw);
-    		
-    		Statement statement = connect.createStatement();
-    		String query = "INSERT INTO `data` (`cname`, `course_dura`)"+ "VALUES ('"+u_name+"', '"+c_duration+"')";
-            PreparedStatement preparedstatement = connect.prepareStatement(query);
-            statement.executeUpdate(query);
-            statement.close(); 
-            connect.close();
-            System.out.println("Congratulation. User regestraton success");
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        System.out.println("year - course - grade - credits\n"+year+" "+ course+" "+ grade+ " "+ credits+" "+get_gpv(grade) );
+        
+        //System.out.println("year - course - grade - credits\n"+year+" "+ course+" "+ grade+ " "+ credits+" "+get_gpv(grade) );
         get_confirm();
-        /// here u can find final inputs
     }
 
     int get_year(){
@@ -110,9 +93,27 @@ public class Add_record {
         temp_confirm =scanner.next().charAt(0);
         int temp_asc=temp_confirm;
         if (temp_asc==121){
-            System.out.println("Record was added");
+        	try{
+                String url ="jdbc:mysql://localhost:3306/student";
+        		String user="root";
+        		String pw="";
+        		Connection connect=DriverManager.getConnection(url,user,pw);
+        		
+        		Statement statement = connect.createStatement();
+        		
+        		String query = "INSERT INTO `data` (`Year`, `course`, `Grade`, `credits`, `gpv`) VALUES ('"+year+"', '"+course+"', '"+ grade+"', '"+ credits+"', '"+get_gpv(grade)+"')";
+                PreparedStatement preparedstatement = connect.prepareStatement(query);
+                statement.executeUpdate(query);
+                statement.close(); 
+                connect.close();
+                System.out.println("Record was added");
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }       
         }
         else if (temp_asc==110){
+        	
             System.out.println("Record was not added");
         }
         else{

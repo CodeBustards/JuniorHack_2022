@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Year;
@@ -26,15 +27,37 @@ public class view_results {
 
         Scanner input = new Scanner(System.in);
         int number = input.nextInt();
-
+        String url ="jdbc:mysql://localhost:3306/student";
+		String user="root";
+		String pw="";
+		Connection connect=DriverManager.getConnection(url,user,pw);
+		
+		Statement statement = connect.createStatement();
+		String query;
 
         switch(number){
-            case(1):/*print year 1 results*/ ;
-            case(2):/*print year 2 results*/ ; 
-            case(3):/*print year 3 results*/ ;
-            case(4):/*print year 4 results*/ ;
+            case(1):
+            	query = "SELECT * FROM `data` WHERE 'data'=1";
+            	break;
+            case(2):
+            	query = "SELECT * FROM `data` WHERE 'data'=2";
+            	break;
+            case(3):
+            	query = "SELECT * FROM `data` WHERE 'data'=3";
+            	break;
+            case(4):
+            	query = "SELECT * FROM `data` WHERE 'data'=4";
+            	break;
         }
         input.close();
+        ResultSet rs = statement.executeQuery(query);
+		while (rs.next()) {
+			System.out.println("course code - "+(rs.getString("course")) );
+			System.out.println("Grade - "+(rs.getString("grade")) );
+			System.out.println("Credits - "+(rs.getString("credits")+"\n") );
+		}
+        statement.close(); 
+        connect.close();
 
         System.out.println("To delete your records press d");
         System.out.println("To go back press 0");

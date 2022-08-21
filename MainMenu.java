@@ -28,10 +28,9 @@ public class MainMenu {
             case 3:
             	
             	export arss=new export();
-                //statement
                 break;
             case 4:
-                //statement
+            	System.exit(0);
                 break;
             case 5:
                 System.exit(0);

@@ -9,10 +9,7 @@ public class Add_record {
     Scanner scanner = new Scanner(System.in);
     Add_record(){
         System.out.println("----ADD results----");
-        int year=get_year();
-        String course=get_course();
-        String grade=get_grade();
-        int credits=get_credits();
+
         
         //System.out.println("year - course - grade - credits\n"+year+" "+ course+" "+ grade+ " "+ credits+" "+get_gpv(grade) );
         get_confirm();
@@ -88,6 +85,10 @@ public class Add_record {
         return temp_credits;
     }
     void get_confirm(){
+        int year=get_year();
+        String course=get_course();
+        String grade=get_grade();
+        int credits=get_credits();
         char temp_confirm =' ';
         System.out.print("Confirm (y/n) : ");
         temp_confirm =scanner.next().charAt(0);
